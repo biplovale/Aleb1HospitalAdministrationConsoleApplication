@@ -1,0 +1,3 @@
+C:/Users/18592/Documents/school/6th semester/Advanced programming language/aleb1HospitalConsoleApp/HospitalAdministrationConsoleApp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/18592/Documents/school/6th semester/Advanced programming language/aleb1HospitalConsoleApp/HospitalAdministrationConsoleApp/cmake-build-debug/CMakeFiles/HospitalAdministrationConsoleApp.dir
+C:/Users/18592/Documents/school/6th semester/Advanced programming language/aleb1HospitalConsoleApp/HospitalAdministrationConsoleApp/cmake-build-debug/CMakeFiles/edit_cache.dir
