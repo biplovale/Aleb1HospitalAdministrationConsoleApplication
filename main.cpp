@@ -1,3 +1,11 @@
+/*
+ * Assignment : Hospital Administration Console Application
+ * Course : CSC 502-001 : Advance Programming Methods
+ * Instructor : Michael Clark Jr
+ * Author : Biplov Ale
+ * */
+
+//Libraries
 #include "Patient.h"
 #include "ConsoleLogger.h"
 #include "FileLogger.h"
@@ -7,20 +15,19 @@
 using namespace std;
 
 //Function prototypes
-string convertToString(char* a);
-void listNormalCommands();
-void listDebugCommands();
+string convertToString(char* a);                                                                                        //converts a char array to string
+void listNormalCommands();                                                                                              //lists all the possible commands in normal mode
+void listDebugCommands();                                                                                               //lists all the possible commands in debug mode
 
 //Console Interface
 int main(){
     cout << "\n" << setw(60) << right << "HOSPITAL" << " ADMINISTRATION CONSOLE APPLICATION\n" << endl;
-    cout << "To view a guide to all commands, TYPE: help" << endl;
 
     const int SIZE = 60;
-    char buffer[SIZE];
+    char buffer[SIZE];                                                                                                  //buffer for user input
 
     //normal mode loop
-    cout << "Command<>: ";
+    cout << "To view a guide to all commands, TYPE: help" << "\nCommand<>: ";
     cin.getline(buffer, SIZE);
     while (strcmp(buffer, "exit") != 0){
         if(strcmp(buffer, "help") == 0){
@@ -62,14 +69,37 @@ int main(){
         else if (strcmp(buffer, "log operations") == 0){
             cout << "log operations" << endl;
         }
+        else if (strcmp(buffer, "clear") == 0){
+            system("cls");
+        }
+        else if (strcmp(buffer, "mode debug") == 0){
+            //Debug mode loop
+            cout << "\nTo view a guide to all commands, TYPE: help" << "\nCommand<Debug>: ";
+            cin.getline(buffer, SIZE);
+            while (strcmp(buffer, "exit") != 0) {
+                if(strcmp(buffer, "help") == 0){
+                    listDebugCommands();
+                }
+                else if (strcmp(buffer, "log operations") == 0){
+                    cout << "debug log operations" << endl;
+                }
+                else if (strcmp(buffer, "clear") == 0){
+                    system("cls");
+                }
+                else{
+                    cout << "Invalid Debug Command" << endl;
+                }
+                cout << "\nTo view a guide to all commands, TYPE: help\nCommand<Debug>: ";
+                cin.getline(buffer, SIZE);
+            }
+        }
         else{
             cout << "Invalid Command" << endl;
         }
 
-        cout << "\nCommand<>: ";
+        cout << "\nTo view a guide to all commands, TYPE: help" << "\nCommand<>: ";
         cin.getline(buffer, SIZE);
     }
-
 
 
     return 0;
@@ -96,15 +126,17 @@ void listNormalCommands(){
                        "\ttreat all                          = treat all patients in triage\n"
                        "\tprint report -d patients           = write out a detail report all patients by doctor in a .txt\n"
                        "\tadd -b patient FILENAME.txt        = bulk add patients to the triage system from a .txt\n"
-                       "\tlog operations                     = write out all executed system operations in a .txt";
+                       "\tlog operations                     = write out all executed system operations in a .txt\n"
+                       "\tmode debug                         = to turn on debug mode\n"
+                       "\tclear                              = clear console";
     cout << list << endl;
 }
 
 //lists all the possible commands in debug mode
 void listDebugCommands(){
     cout << "All Debug mode commands:" << endl;
-    string list = "\tmode normal                       = to turn on normal mode\n"
-                       "\texit debug                        = exit debug mode\n"
-                       "\tlog operations                    = show all executed system operations in console";
+    string list =      "\texit                              = exit debug mode\n"
+                       "\tlog operations                    = show all executed system operations in console\n"
+                       "\tclear                             = clear console";
     cout << list << endl;
 }
