@@ -16,12 +16,56 @@ int main(){
     cout << "\n" << setw(60) << right << "HOSPITAL" << " ADMINISTRATION CONSOLE APPLICATION\n" << endl;
     cout << "To view a guide to all commands, TYPE: help" << endl;
 
-    //normal mode loop
     const int SIZE = 60;
     char buffer[SIZE];
+
+    //normal mode loop
     cout << "Command<>: ";
     cin.getline(buffer, SIZE);
     while (strcmp(buffer, "exit") != 0){
+        if(strcmp(buffer, "help") == 0){
+            listNormalCommands();
+        }
+        else if (strcmp(buffer, "add patient") == 0){
+            cout << "add patient" << endl;
+        }
+        else if (strcmp(buffer, "treat patient") == 0){
+            cout << "treat patient" << endl;
+        }
+        else if (strcmp(buffer, "report patient") == 0){
+            cout << "report patient" << endl;
+        }
+        else if (strcmp(buffer, "print report patient") == 0){
+            cout << "print report patient" << endl;
+        }
+        else if (strcmp(buffer, "report -n patient") == 0){
+            cout << "report -n patient" << endl;
+        }
+        else if (strcmp(buffer, "report patient NAME") == 0){
+            cout << "report patient NAME" << endl;
+        }
+        else if (strcmp(buffer, "print report -td patients") == 0){
+            cout << "print report -td patient" << endl;
+        }
+        else if (strcmp(buffer, "print report -t patients") == 0){
+            cout << "print report -t patients" << endl;
+        }
+        else if (strcmp(buffer, "treat all") == 0){
+            cout << "treat all" << endl;
+        }
+        else if (strcmp(buffer, "print report -d patients") == 0){
+            cout << "print report -d patients" << endl;
+        }
+        else if (strcmp(buffer, "print report -d patients") == 0){
+            cout << "print report -d patients" << endl;
+        }
+        else if (strcmp(buffer, "log operations") == 0){
+            cout << "log operations" << endl;
+        }
+        else{
+            cout << "Invalid Command" << endl;
+        }
+
         cout << "\nCommand<>: ";
         cin.getline(buffer, SIZE);
     }
