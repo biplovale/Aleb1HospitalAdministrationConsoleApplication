@@ -6,9 +6,9 @@ Patient::Patient(string fName, string mName, string lName, string suf, const vec
 }
 
 //Destructor
-//Patient::~Patient(){
-//
-//}
+Patient::~Patient(){
+
+}
 
 //Copy constructor
 Patient::Patient(const Patient& rhs)
@@ -44,6 +44,9 @@ string Patient::getSuffix() const{
 }
 vector<string> Patient::getAliment() const{
     return ailment;
+}
+bool Patient::getIsTreated() const {
+    return isTreated;
 }
 string Patient::getDoctor() const{
     return doctor;

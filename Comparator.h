@@ -6,7 +6,7 @@
 class LessThanByPriority{
 public:
     bool operator() (const Patient& lhs, const Patient& rhs) {
-        return (lhs.getPriority() < rhs.getPriority());
+        return (lhs.getPriority() > rhs.getPriority());
     }
 };
 

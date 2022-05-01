@@ -7,15 +7,17 @@
 
 class HospitalAdministrationController {
 public:
-//    HospitalAdministrationController();
-//    ~HospitalAdministrationController();
-    void addPatient(const Patient& patient){
-        HospitalAdministrationController::triageList.push(patient);
-}                                                                                                  //add patient to triage system or treated triage system
+    HospitalAdministrationController();
+    ~HospitalAdministrationController();
+    void addPatient(const Patient& patient);                                                                            //add patient to triage system or treated triage system
+
+    //mutators and accessors
+    priority_queue<Patient, vector<Patient>, LessThanByPriority> getTriageList() const;
+    priority_queue<Patient, vector<Patient>, LessThanByPriority> getTreatedTriageList() const;
 private:
     //containers
-    static priority_queue<Patient, vector<Patient>, LessThanByPriority> triageList;                                     //stores untreated triage patients priority-wise and then first come, first served
-    static priority_queue<Patient, vector<Patient>, LessThanByPriority> treatedTriageList;                              //stores treated triage patients priority-wise and then first come, first served
+    priority_queue<Patient, vector<Patient>, LessThanByPriority> triageList;                                     //stores untreated triage patients priority-wise and then first come, first served
+    priority_queue<Patient, vector<Patient>, LessThanByPriority> treatedTriageList;                              //stores treated triage patients priority-wise and then first come, first served
 };
 
 

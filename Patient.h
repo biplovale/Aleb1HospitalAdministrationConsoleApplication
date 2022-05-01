@@ -11,7 +11,7 @@ using namespace std;
 class Patient {
 public:
     Patient(string fName, string mName, string lName, string suf, const vector<string>& ail, string doc, bool isT, unsigned int pri);   //Constructor
-//    ~Patient();                                                                                                         //Destructor
+    ~Patient();                                                                                                         //Destructor
     Patient(const Patient& rhs);                                                                                        //Copy constructor
     Patient& operator=(const Patient& rhs);                                                                       //operator= overload
 
@@ -21,7 +21,7 @@ public:
     string getLastName() const;
     string getSuffix() const;
     vector<string> getAliment() const;
-//    bool getIsTreated() const;
+    bool getIsTreated() const;
     string getDoctor() const;
     unsigned int getPriority() const;
 

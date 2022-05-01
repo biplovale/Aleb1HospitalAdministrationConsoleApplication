@@ -6,7 +6,7 @@
  * */
 
 //Libraries
-//#include "HospitalAdministrationController.h"
+#include "HospitalAdministrationController.h"
 #include "Patient.h"
 #include <iostream>
 #include <iomanip>
@@ -21,16 +21,11 @@ void listDebugCommands();                                                       
 
 //Console Interface
 int main(){
-
-    {
-    Patient p1 = Patient("Biplov", "Kumar", "Ale", "jr.", vector<string> { "headache", "pain"}, "Dr. Ale", false, 1);
-    }
-    //    cout << patient.getPriority();
-    cout << "\n" << setw(60) << right << "HOSPITAL" << " ADMINISTRATION CONSOLE APPLICATION\n" << endl;
+    cout << "\n" << setw(60) << right << "HOSPITAL" << " ADMINISTRATION CONSOLE APPLICATION" << endl;
 
     const int SIZE = 60;
     char buffer[SIZE];                                                                                                  //buffer for user input
-//    HospitalAdministrationController HAController = HospitalAdministrationController();
+    HospitalAdministrationController HAController = HospitalAdministrationController();
 
     //normal mode loop
     cout << "To view a guide to all commands, TYPE: help" << "\nCommand<>: ";
@@ -48,33 +43,42 @@ int main(){
 
             string eachAilment;
             int numOfAilment;
+            int numOfPatient;
 
             //user inputs
-            cout << "Enter first name:\n";
-            cin >> fName;
-            cout << "Enter middle name:\n";
-            cin >> mName;
-            cout << "Enter last name:\n";
-            cin >> lName;
-            cout << "Enter suffix (\"None\" if not applicable):\n";
-            cin >> suf;
-            cout << "Number of ailment to be added:\n";
-            cin >> numOfAilment;
-            for(int i = 1; i <= numOfAilment; i++){
-                cout << "Enter ailment:\n";
-                cin >> eachAilment;
-                ailment.push_back(eachAilment);
-            }
-            cout << "Enter doctor to be assigned:\n";
-            cin >> doctor;
-            cout << "Enter if patient is treated (\"true\" or \"false\"):\n";
-            cin >> isTreated;
-            cout << "Enter priority metric (int from 0):\n";
-            cin >> priority;
+            cout << "How many patients do you want to add?\n=> ";
+            cin >> numOfPatient;
+            cin.ignore();
+            for(int j = 1; j <= numOfPatient; j++){
+                cout << "Enter first name:\n";
+                getline(cin, fName);
+                cout << "Enter middle name:\n";
+                getline(cin, mName);;
+                cout << "Enter last name:\n";
+                getline(cin, lName);;
+                cout << "Enter suffix (\"None\" if not applicable):\n";
+                getline(cin, suf);;
+                cout << "Number of ailment to be added:\n";
+                cin >> numOfAilment;               //needs exception handler
+                cin.ignore();
+                for(int i = 1; i <= numOfAilment; i++){
+                    cout << "Enter ailment:\n";
+                    getline(cin, eachAilment);
+                    ailment.push_back(eachAilment);
+                }
+                cout << "Enter doctor to be assigned:\n";
+                getline(cin, doctor);
+                cout << "Enter if patient is treated (\"1 = true\" or \"0 = false\"):\n";
+                cin >> isTreated; //needs exception handling
+                cout << "Enter priority metric (int from 0):\n";
+                cin >> priority;        //needs exception handling
+                cin.ignore();
 
-//            Patient patient(fName, mName, lName, suf, ailment, doctor, isTreated, priority);
-//            HAController.addPatient(patient);
-//            cout << "add patient" << endl;
+                Patient patient(fName, mName, lName, suf, ailment, doctor, isTreated, priority);
+                HAController.addPatient(patient);
+            }
+
+            break;
         }
         else if (strcmp(buffer, "treat patient") == 0){
             cout << "treat patient" << endl;
