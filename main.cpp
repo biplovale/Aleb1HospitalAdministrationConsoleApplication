@@ -7,18 +7,19 @@
 
 //Libraries
 #include "Patient.h"
+#include "HospitalAdministrationController.h"
 #include "ConsoleLogger.h"
 #include "FileLogger.h"
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+
 using namespace std;
 
 //Function prototypes
 string convertToString(char* a);                                                                                        //converts a char array to string
 void listNormalCommands();                                                                                              //lists all the possible commands in normal mode
-void listDebugCommands();                                                                                               //lists all the possible commands in debug mode
-void addPatient();                                                                                                      //add patient to triage system
+void listDebugCommands();                                                                                               //lists all the possible commands in debug mode //add patient to triage system
 
 //Console Interface
 int main(){
@@ -26,6 +27,7 @@ int main(){
 
     const int SIZE = 60;
     char buffer[SIZE];                                                                                                  //buffer for user input
+    HospitalAdministrationController HAController = HospitalAdministrationController();
 
     //normal mode loop
     cout << "To view a guide to all commands, TYPE: help" << "\nCommand<>: ";
@@ -35,7 +37,8 @@ int main(){
             listNormalCommands();
         }
         else if (strcmp(buffer, "add patient") == 0){
-            addPatient();
+//            HAController.addPatient();
+            cout << "add patient" << endl;
         }
         else if (strcmp(buffer, "treat patient") == 0){
             cout << "treat patient" << endl;
@@ -140,39 +143,4 @@ void listDebugCommands(){
                        "\tlog operations                    = show all executed system operations in console\n"
                        "\tclear                             = clear console";
     cout << list << endl;
-}
-
-//add patient to triage system
-void addPatient(){
-    string fName, mName, lName, suf;
-    vector<string> ailment;
-    string doctor;
-    unsigned int priority;
-    string eachAilment;
-    int numOfAilment;
-
-    //user inputs
-    cout << "Enter first name:\n";
-    cin >> fName;
-    cout << "Enter middle name:\n";
-    cin >> mName;
-    cout << "Enter last name:\n";
-    cin >> lName;
-    cout << "Enter suffix (\"None\" if not applicable):\n";
-    cin >> suf;
-    cout << "Number of ailment to be added:\n";
-    cin >> numOfAilment;
-    for(int i = 1; i << numOfAilment; i++){
-        cout << "Enter ailment:\n";
-        cin >> eachAilment;
-        ailment.push_back(eachAilment);
-    }
-    cout << "Enter doctor to be assigned:\n";
-    cin >> doctor;
-    cout << "Enter priority metric (int from 0):\n";
-    cin >> priority;
-
-    Patient patient(fName, mName, lName, suf, ailment, doctor, priority);
-    Patient::triageList.push(patient);
-
 }
