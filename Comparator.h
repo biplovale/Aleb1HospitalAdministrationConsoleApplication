@@ -1,5 +1,6 @@
 #ifndef COMPARATOR_H
 #define COMPARATOR_H
+
 #include "Patient.h"
 
 class LessThanByPriority{
@@ -8,4 +9,5 @@ public:
         return (lhs.getPriority() < rhs.getPriority());
     }
 };
+
 #endif //COMPARATOR_H

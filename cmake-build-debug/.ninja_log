@@ -1,6 +1,12 @@
 # ninja log v5
-2	443	6731212188146039	CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj	b30846bb906109e4
-1183	1378	6731187626985986	HospitalAdministrationConsoleApp.exe	f45e492b423e4a48
-4	539	6731215416372432	CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj	b30846bb906109e4
-4	416	6731216164922809	CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj	b30846bb906109e4
-2	437	6731216732963143	CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj	b30846bb906109e4
+4	836	6731302009291408	CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj	b30846bb906109e4
+9	374	6731224003733554	CMakeFiles/HospitalAdministrationConsoleApp.dir/ConsoleLogger.cpp.obj	ecc6ccf3412bcb5f
+671	813	6731279932572826	HospitalAdministrationConsoleApp.exe	f45e492b423e4a48
+6	391	6731224003913078	CMakeFiles/HospitalAdministrationConsoleApp.dir/FileLogger.cpp.obj	606dd55d192e6150
+7	531	6731224005308723	CMakeFiles/HospitalAdministrationConsoleApp.dir/HospitalAdministrationController.cpp.obj	411966a86becab7
+10	868	6731293785734369	CMakeFiles/HospitalAdministrationConsoleApp.dir/Patient.cpp.obj	f060dcc958f71711
+11	542	6731334801633931	CMakeFiles/HospitalAdministrationConsoleApp.dir/ConsoleLogger.cpp.obj	ecc6ccf3412bcb5f
+7	552	6731334801713890	CMakeFiles/HospitalAdministrationConsoleApp.dir/FileLogger.cpp.obj	606dd55d192e6150
+14	634	6731334802561457	CMakeFiles/HospitalAdministrationConsoleApp.dir/HospitalAdministrationController.cpp.obj	411966a86becab7
+3	649	6731334802681098	CMakeFiles/HospitalAdministrationConsoleApp.dir/Patient.cpp.obj	f060dcc958f71711
+649	807	6731334804217086	HospitalAdministrationConsoleApp.exe	fc459b7612e78e2b

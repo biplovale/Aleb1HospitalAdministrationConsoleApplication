@@ -67,6 +67,30 @@ build CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj: CXX_COMPILER
   OBJECT_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
   OBJECT_FILE_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
 
+build CMakeFiles/HospitalAdministrationConsoleApp.dir/Patient.cpp.obj: CXX_COMPILER__HospitalAdministrationConsoleApp_Debug C$:/Users/18592/Documents/school/6th$ semester/Advanced$ programming$ language/aleb1HospitalConsoleApp/HospitalAdministrationConsoleApp/Patient.cpp || cmake_object_order_depends_target_HospitalAdministrationConsoleApp
+  DEP_FILE = CMakeFiles\HospitalAdministrationConsoleApp.dir\Patient.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+  OBJECT_FILE_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+
+build CMakeFiles/HospitalAdministrationConsoleApp.dir/ConsoleLogger.cpp.obj: CXX_COMPILER__HospitalAdministrationConsoleApp_Debug C$:/Users/18592/Documents/school/6th$ semester/Advanced$ programming$ language/aleb1HospitalConsoleApp/HospitalAdministrationConsoleApp/ConsoleLogger.cpp || cmake_object_order_depends_target_HospitalAdministrationConsoleApp
+  DEP_FILE = CMakeFiles\HospitalAdministrationConsoleApp.dir\ConsoleLogger.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+  OBJECT_FILE_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+
+build CMakeFiles/HospitalAdministrationConsoleApp.dir/FileLogger.cpp.obj: CXX_COMPILER__HospitalAdministrationConsoleApp_Debug C$:/Users/18592/Documents/school/6th$ semester/Advanced$ programming$ language/aleb1HospitalConsoleApp/HospitalAdministrationConsoleApp/FileLogger.cpp || cmake_object_order_depends_target_HospitalAdministrationConsoleApp
+  DEP_FILE = CMakeFiles\HospitalAdministrationConsoleApp.dir\FileLogger.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+  OBJECT_FILE_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+
+build CMakeFiles/HospitalAdministrationConsoleApp.dir/HospitalAdministrationController.cpp.obj: CXX_COMPILER__HospitalAdministrationConsoleApp_Debug C$:/Users/18592/Documents/school/6th$ semester/Advanced$ programming$ language/aleb1HospitalConsoleApp/HospitalAdministrationConsoleApp/HospitalAdministrationController.cpp || cmake_object_order_depends_target_HospitalAdministrationConsoleApp
+  DEP_FILE = CMakeFiles\HospitalAdministrationConsoleApp.dir\HospitalAdministrationController.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+  OBJECT_FILE_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target HospitalAdministrationConsoleApp
@@ -75,7 +99,7 @@ build CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj: CXX_COMPILER
 #############################################
 # Link the executable HospitalAdministrationConsoleApp.exe
 
-build HospitalAdministrationConsoleApp.exe: CXX_EXECUTABLE_LINKER__HospitalAdministrationConsoleApp_Debug CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj
+build HospitalAdministrationConsoleApp.exe: CXX_EXECUTABLE_LINKER__HospitalAdministrationConsoleApp_Debug CMakeFiles/HospitalAdministrationConsoleApp.dir/main.cpp.obj CMakeFiles/HospitalAdministrationConsoleApp.dir/Patient.cpp.obj CMakeFiles/HospitalAdministrationConsoleApp.dir/ConsoleLogger.cpp.obj CMakeFiles/HospitalAdministrationConsoleApp.dir/FileLogger.cpp.obj CMakeFiles/HospitalAdministrationConsoleApp.dir/HospitalAdministrationController.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\HospitalAdministrationConsoleApp.dir

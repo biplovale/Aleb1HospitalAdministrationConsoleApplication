@@ -2,13 +2,16 @@
 #define HOSPITALADMINISTRATIONCONTROLLER_H
 
 #include "Comparator.h"
+#include "Patient.h"
 #include <queue>
 
 class HospitalAdministrationController {
 public:
-    HospitalAdministrationController();
-    ~HospitalAdministrationController();
-    void addPatient();                                                                                                  //add patient to triage system or treated triage system
+//    HospitalAdministrationController();
+//    ~HospitalAdministrationController();
+    void addPatient(const Patient& patient){
+        HospitalAdministrationController::triageList.push(patient);
+}                                                                                                  //add patient to triage system or treated triage system
 private:
     //containers
     static priority_queue<Patient, vector<Patient>, LessThanByPriority> triageList;                                     //stores untreated triage patients priority-wise and then first come, first served

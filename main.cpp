@@ -6,10 +6,8 @@
  * */
 
 //Libraries
+//#include "HospitalAdministrationController.h"
 #include "Patient.h"
-#include "HospitalAdministrationController.h"
-#include "ConsoleLogger.h"
-#include "FileLogger.h"
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -23,11 +21,16 @@ void listDebugCommands();                                                       
 
 //Console Interface
 int main(){
+
+    {
+    Patient p1 = Patient("Biplov", "Kumar", "Ale", "jr.", vector<string> { "headache", "pain"}, "Dr. Ale", false, 1);
+    }
+    //    cout << patient.getPriority();
     cout << "\n" << setw(60) << right << "HOSPITAL" << " ADMINISTRATION CONSOLE APPLICATION\n" << endl;
 
     const int SIZE = 60;
     char buffer[SIZE];                                                                                                  //buffer for user input
-    HospitalAdministrationController HAController = HospitalAdministrationController();
+//    HospitalAdministrationController HAController = HospitalAdministrationController();
 
     //normal mode loop
     cout << "To view a guide to all commands, TYPE: help" << "\nCommand<>: ";
@@ -37,8 +40,41 @@ int main(){
             listNormalCommands();
         }
         else if (strcmp(buffer, "add patient") == 0){
-//            HAController.addPatient();
-            cout << "add patient" << endl;
+            string fName, mName, lName, suf;
+            vector<string> ailment;
+            string doctor;
+            bool isTreated;
+            unsigned int priority;
+
+            string eachAilment;
+            int numOfAilment;
+
+            //user inputs
+            cout << "Enter first name:\n";
+            cin >> fName;
+            cout << "Enter middle name:\n";
+            cin >> mName;
+            cout << "Enter last name:\n";
+            cin >> lName;
+            cout << "Enter suffix (\"None\" if not applicable):\n";
+            cin >> suf;
+            cout << "Number of ailment to be added:\n";
+            cin >> numOfAilment;
+            for(int i = 1; i <= numOfAilment; i++){
+                cout << "Enter ailment:\n";
+                cin >> eachAilment;
+                ailment.push_back(eachAilment);
+            }
+            cout << "Enter doctor to be assigned:\n";
+            cin >> doctor;
+            cout << "Enter if patient is treated (\"true\" or \"false\"):\n";
+            cin >> isTreated;
+            cout << "Enter priority metric (int from 0):\n";
+            cin >> priority;
+
+//            Patient patient(fName, mName, lName, suf, ailment, doctor, isTreated, priority);
+//            HAController.addPatient(patient);
+//            cout << "add patient" << endl;
         }
         else if (strcmp(buffer, "treat patient") == 0){
             cout << "treat patient" << endl;
@@ -63,9 +99,6 @@ int main(){
         }
         else if (strcmp(buffer, "treat all") == 0){
             cout << "treat all" << endl;
-        }
-        else if (strcmp(buffer, "print report -d patients") == 0){
-            cout << "print report -d patients" << endl;
         }
         else if (strcmp(buffer, "print report -d patients") == 0){
             cout << "print report -d patients" << endl;
