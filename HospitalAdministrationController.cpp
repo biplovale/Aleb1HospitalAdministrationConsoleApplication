@@ -18,6 +18,12 @@ void HospitalAdministrationController::addPatient(const Patient &patient) {
     }
 }
 
+//removes patient from triage system to treated triage system
+void HospitalAdministrationController::removePatient() {
+    treatedTriageList.push(triageList.top());
+    triageList.pop();
+}
+
 //Accessors and Mutators
 priority_queue<Patient, vector<Patient>, LessThanByPriority> HospitalAdministrationController::getTriageList() const {
     return triageList;

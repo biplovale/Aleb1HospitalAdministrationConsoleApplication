@@ -14,6 +14,7 @@ Patient::~Patient(){
 Patient::Patient(const Patient& rhs)
     : firstName(rhs.firstName), middleName(rhs.middleName), lastName(rhs.lastName), suffix(rhs.suffix), ailment(rhs.ailment), doctor(rhs.doctor), isTreated(rhs.isTreated), priority(rhs.priority){
 }
+
 //operator= overload
 Patient& Patient::operator=(const Patient& rhs){
     //alias test

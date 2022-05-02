@@ -11,6 +11,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include <unistd.h>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ int main(){
     HospitalAdministrationController HAController = HospitalAdministrationController();
 
     //normal mode loop
-    cout << "To view a guide to all commands, TYPE: help" << "\nCommand<>: ";
+    cout << "To view a guide to all commands, TYPE: help" << "\nTo exit, TYPE: exit" << "\nCommand<>: ";
     cin.getline(buffer, SIZE);
     while (strcmp(buffer, "exit") != 0){
         if(strcmp(buffer, "help") == 0){
@@ -60,7 +61,6 @@ int main(){
                 getline(cin, suf);;
                 cout << "Number of ailment to be added:\n";
                 cin >> numOfAilment;               //needs exception handler
-                cin.ignore();
                 for(int i = 1; i <= numOfAilment; i++){
                     cout << "Enter ailment:\n";
                     getline(cin, eachAilment);
@@ -77,11 +77,13 @@ int main(){
                 Patient patient(fName, mName, lName, suf, ailment, doctor, isTreated, priority);
                 HAController.addPatient(patient);
             }
-
-            break;
         }
         else if (strcmp(buffer, "treat patient") == 0){
-            cout << "treat patient" << endl;
+            if(!HAController.getTreatedTriageList().empty()) {
+                int random = rand() % (4 - 2 + 1) + 1;
+                sleep(random);
+                HAController.removePatient();
+            }
         }
         else if (strcmp(buffer, "report patient") == 0){
             cout << "report patient" << endl;
@@ -115,7 +117,7 @@ int main(){
         }
         else if (strcmp(buffer, "mode debug") == 0){
             //Debug mode loop
-            cout << "\nTo view a guide to all commands, TYPE: help" << "\nCommand<Debug>: ";
+            cout << "\nTo view a guide to all commands, TYPE: help" << "\nTo exit Debug mode, TYPE: exit" << "\nCommand<Debug>: ";
             cin.getline(buffer, SIZE);
             while (strcmp(buffer, "exit") != 0) {
                 if(strcmp(buffer, "help") == 0){

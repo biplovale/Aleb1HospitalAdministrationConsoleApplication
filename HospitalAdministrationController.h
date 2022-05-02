@@ -10,6 +10,7 @@ public:
     HospitalAdministrationController();
     ~HospitalAdministrationController();
     void addPatient(const Patient& patient);                                                                            //add patient to triage system or treated triage system
+    void removePatient();                                                                         //removes a patient from triage system to treated triage system
 
     //mutators and accessors
     priority_queue<Patient, vector<Patient>, LessThanByPriority> getTriageList() const;
