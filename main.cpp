@@ -12,6 +12,9 @@
 #include <iomanip>
 #include <cstring>
 #include <unistd.h>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
 
 using namespace std;
 
@@ -19,6 +22,7 @@ using namespace std;
 string convertToString(char* a);                                                                                        //converts a char array to string
 void listNormalCommands();                                                                                              //lists all the possible commands in normal mode
 void listDebugCommands();                                                                                               //lists all the possible commands in debug mode //add patient to triage system
+char* fillFileReadBuffer(ifstream& Fobj, char buffer[], char delimiter);                                                //fills the buffer from .txt till the delimiter is reached
 
 //Console Interface
 int main(){
@@ -115,6 +119,62 @@ int main(){
         else if (strcmp(buffer, "clear") == 0){
             system("cls");
         }
+
+
+
+        else if (strcmp(buffer, "add -b patient FILENAME.TXT") == 0){
+            ifstream inClientFile("patients.txt", ios::in);
+            if(!inClientFile){
+                cerr << "File could not be opened" << endl;
+                exit(1);
+            }
+
+            while(!inClientFile.eof()) {
+                string fName, mName, lName, suf;
+                vector<string> ailment;
+                string doctor;
+                bool isTreated;
+                unsigned int priority;
+
+                string eachAilment;
+                char fileReadBuffer[20];                                                                                //buffer for file read inputs
+
+                fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                fName = fillFileReadBuffer(inClientFile, fileReadBuffer, '\n');
+
+                fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                mName = fillFileReadBuffer(inClientFile, fileReadBuffer, '\n');
+
+                fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                lName = fillFileReadBuffer(inClientFile, fileReadBuffer, '\n');
+
+                fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                suf = fillFileReadBuffer(inClientFile, fileReadBuffer, '\n');
+
+                fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                while (strcmp(fileReadBuffer, "ailment") == 0) {
+                    eachAilment = fillFileReadBuffer(inClientFile, fileReadBuffer, '\n');
+                    ailment.push_back(eachAilment);
+                    fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                }
+                doctor = fillFileReadBuffer(inClientFile, fileReadBuffer, '\n');
+
+                fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                istringstream(fillFileReadBuffer(inClientFile, fileReadBuffer, '\n')) >> isTreated;
+
+                fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
+                priority = strtol(fillFileReadBuffer(inClientFile, fileReadBuffer, '\n'), nullptr, 10);
+
+                Patient patient(fName, mName, lName, suf, ailment, doctor, isTreated, priority);
+                HAController.addPatient(patient);
+            }
+
+            cout << "\t[EoF reached]" << endl;
+        }
+
+
+
+
         else if (strcmp(buffer, "mode debug") == 0){
             //Debug mode loop
             cout << "\nTo view a guide to all commands, TYPE: help" << "\nTo exit Debug mode, TYPE: exit" << "\nCommand<Debug>: ";
@@ -182,4 +242,24 @@ void listDebugCommands(){
                        "\tlog operations                    = show all executed system operations in console\n"
                        "\tclear                             = clear console";
     cout << list << endl;
+}
+
+//fills the buffer from a .txt till the delimiter is reached
+char* fillFileReadBuffer(ifstream& Fobj, char buffer[], char delimiter){
+    int i = 0;
+    char c;
+
+    Fobj.get(c);
+    while(c != delimiter){
+        buffer[i] = c;
+        Fobj.get(c);
+        i++;
+        if (Fobj.eof()){
+            break;
+        }
+    }
+    c = '\0';
+    buffer[i] = c;
+
+    return buffer;
 }

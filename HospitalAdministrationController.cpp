@@ -24,6 +24,14 @@ void HospitalAdministrationController::removePatient() {
     triageList.pop();
 }
 
+void HospitalAdministrationController::popTriageList() {
+    triageList.pop();
+}
+
+void HospitalAdministrationController::popTreatedTriageList() {
+    treatedTriageList.pop();
+}
+
 //Accessors and Mutators
 priority_queue<Patient, vector<Patient>, LessThanByPriority> HospitalAdministrationController::getTriageList() const {
     return triageList;
