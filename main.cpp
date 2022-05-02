@@ -119,16 +119,19 @@ int main(){
         else if (strcmp(buffer, "clear") == 0){
             system("cls");
         }
-
-
-
         else if (strcmp(buffer, "add -b patient FILENAME.TXT") == 0){
             ifstream inClientFile("patients.txt", ios::in);
+
+//            string fileName;
+//            cout << "Enter the .txt file:\n";
+//            cin >> fileName;
+
             if(!inClientFile){
                 cerr << "File could not be opened" << endl;
                 exit(1);
             }
 
+            //reading from files
             while(!inClientFile.eof()) {
                 string fName, mName, lName, suf;
                 vector<string> ailment;
@@ -171,10 +174,6 @@ int main(){
 
             cout << "\t[EoF reached]" << endl;
         }
-
-
-
-
         else if (strcmp(buffer, "mode debug") == 0){
             //Debug mode loop
             cout << "\nTo view a guide to all commands, TYPE: help" << "\nTo exit Debug mode, TYPE: exit" << "\nCommand<Debug>: ";
@@ -228,7 +227,7 @@ void listNormalCommands(){
                        "\tprint report -t patients           = write out a detail report of all triage patients in a .txt\n"
                        "\ttreat all                          = treat all patients in triage\n"
                        "\tprint report -d patients           = write out a detail report all patients by doctor in a .txt\n"
-                       "\tadd -b patient FILENAME.txt        = bulk add patients to the triage system from a .txt\n"
+                       "\tadd -b patient FILENAME.TXT        = bulk add patients to the triage system from a .txt\n"
                        "\tlog operations                     = write out all executed system operations in a .txt\n"
                        "\tmode debug                         = to turn on debug mode\n"
                        "\tclear                              = clear console";
