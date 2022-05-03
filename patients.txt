@@ -14,7 +14,7 @@ lastName:Clark
 suffix:
 ailment:severe cough
 doctor:Pepper
-treated:0
+treated:1
 priority:1
 
 firstName:Daniel

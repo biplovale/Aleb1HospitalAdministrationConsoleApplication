@@ -1,8 +1,5 @@
-add -b patients
-print report -t patients
+mode debug
+<Debug> help
 <Debug> log operations
 <Debug> exit
-treat all
-treat all
-print report -t patients
 log operations

@@ -182,7 +182,7 @@ int main(){
             ofstream outClientFile("logEntry.txt", ios::out);
 
             int i = 0;
-            while (!commandLog.empty()){
+            while (i < commandLog.size()){
                 outClientFile << commandLog[i] << endl;
                 i++;
             }
@@ -252,6 +252,8 @@ int main(){
             cout << "\t[EoF reached]" << endl;
         }
         else if (strcmp(buffer, "mode debug") == 0){
+            commandLog.emplace_back("mode debug");
+
             //Debug mode loop
             cout << "\nTo view a guide to all commands, TYPE: help" << "\nTo exit Debug mode, TYPE: exit" << "\nCommand<Debug>: ";
             cin.getline(buffer, SIZE);
@@ -262,7 +264,12 @@ int main(){
                 }
                 else if (strcmp(buffer, "log operations") == 0){
                     commandLog.emplace_back("<Debug> log operations");
-                    cout << "debug log operations" << endl;
+
+                    int i = 0;
+                    while (i < commandLog.size()){
+                        cout << commandLog[i] << endl;
+                        i++;
+                    }
                 }
                 else if (strcmp(buffer, "clear") == 0){
                     commandLog.emplace_back("<Debug> clear");
