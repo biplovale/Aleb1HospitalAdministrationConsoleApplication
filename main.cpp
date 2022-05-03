@@ -28,6 +28,7 @@ int main(){
 
     const int SIZE = 60;
     char buffer[SIZE];                                                                                                  //buffer for user input
+    vector<string> commandLog;
     HospitalAdministrationController HAController = HospitalAdministrationController();
 
     //normal mode loop
@@ -35,9 +36,12 @@ int main(){
     cin.getline(buffer, SIZE);
     while (strcmp(buffer, "exit") != 0){
         if(strcmp(buffer, "help") == 0){
+            commandLog.emplace_back("help");
             listNormalCommands();
         }
         else if (strcmp(buffer, "add patient") == 0){
+            commandLog.emplace_back("add patient");
+
             string fName, mName, lName, suf;
             vector<string> ailment;
             string doctor;
@@ -82,6 +86,7 @@ int main(){
             }
         }
         else if (strcmp(buffer, "treat patient") == 0){
+            commandLog.emplace_back("treat patient");
             if(!HAController.getTriageList().empty()) {
                 int random = rand() % (4 - 2 + 1) + 1;
                 sleep(random);
@@ -92,40 +97,106 @@ int main(){
             }
         }
         else if (strcmp(buffer, "report patient") == 0) {
+            commandLog.emplace_back("report patient");
             HAController.consoleReportPatient(HAController.getTriageList().top());
         }
         else if (strcmp(buffer, "print report patient") == 0){
-            HAController.fileReportPatient(HAController.getTriageList().top());
+            commandLog.emplace_back("print report patient");
+            HAController.fileReportPatient(HAController.getTriageList().top(), false);
             cout << "\tReport printed." << endl;
         }
         else if (strcmp(buffer, "report -n patient") == 0){
+            commandLog.emplace_back("report -n patient");
             Patient currentPatient = HAController.getTriageList().top();
             HAController.popTriageList();
             HAController.consoleReportPatient(HAController.getTriageList().top());
             HAController.getTriageList().push(currentPatient);
         }
         else if (strcmp(buffer, "report patient NAME") == 0){
+            commandLog.emplace_back("report patient NAME");
+
             cout << "report patient NAME" << endl;
         }
         else if (strcmp(buffer, "print report -td patients") == 0){
-            cout << "print report -td patient" << endl;
+            commandLog.emplace_back("print report -td patients");
+
+            vector<Patient> tempList;
+
+            HAController.fileReportClear();
+            while (!HAController.getTreatedTriageList().empty()){
+                Patient eachPatient = HAController.getTreatedTriageList().top();
+                HAController.fileReportPatient(eachPatient, true);
+                HAController.popTreatedTriageList();
+                tempList.push_back(eachPatient);
+            }
+
+            for (int i = 0; i < tempList.size(); i++){
+                HAController.getTreatedTriageList().push(tempList[i]);
+            }
+
+            cout << "Report printed" << endl;
         }
         else if (strcmp(buffer, "print report -t patients") == 0){
-            cout << "print report -t patients" << endl;
+            commandLog.emplace_back("print report -t patients");
+
+            vector<Patient> tempList;
+
+            HAController.fileReportClear();
+            while (!HAController.getTriageList().empty()){
+                Patient eachPatient = HAController.getTriageList().top();
+                HAController.fileReportPatient(eachPatient, true);
+                HAController.popTriageList();
+                tempList.push_back(eachPatient);
+            }
+
+            for (int i = 0; i < tempList.size(); i++){
+                HAController.getTriageList().push(tempList[i]);
+            }
+
+            cout << "Report printed" << endl;
         }
         else if (strcmp(buffer, "treat all") == 0){
-            cout << "treat all" << endl;
+            commandLog.emplace_back("treat all");
+
+            if (!HAController.getTriageList().empty()) {
+                while (!HAController.getTriageList().empty()) {
+                    int random = rand() % (4 - 2 + 1) + 1;
+                    sleep(random);
+                    HAController.removePatient();
+                }
+                cout << "All patients treated" << endl;
+            }
+            else {
+                cout << "Triage system is empty\n";
+            }
+
         }
         else if (strcmp(buffer, "print report -d patients") == 0){
+            commandLog.emplace_back("print report -d patients");
+
             cout << "print report -d patients" << endl;
         }
         else if (strcmp(buffer, "log operations") == 0){
-            cout << "log operations" << endl;
+            commandLog.emplace_back("log operations");
+
+            ofstream outClientFile("logEntry.txt", ios::out);
+
+            int i = 0;
+            while (!commandLog.empty()){
+                outClientFile << commandLog[i] << endl;
+                i++;
+            }
+
+            outClientFile.close();
+            cout << "Command log printed" << endl;
         }
         else if (strcmp(buffer, "clear") == 0){
+            commandLog.emplace_back("clear");
             system("cls");
         }
         else if (strcmp(buffer, "add -b patients") == 0){
+            commandLog.emplace_back("add -b patients");
+
             ifstream inClientFile("patients.txt", ios::in);
 
 //            string fileName;
@@ -186,12 +257,15 @@ int main(){
             cin.getline(buffer, SIZE);
             while (strcmp(buffer, "exit") != 0) {
                 if(strcmp(buffer, "help") == 0){
+                    commandLog.emplace_back("<Debug> help");
                     listDebugCommands();
                 }
                 else if (strcmp(buffer, "log operations") == 0){
+                    commandLog.emplace_back("<Debug> log operations");
                     cout << "debug log operations" << endl;
                 }
                 else if (strcmp(buffer, "clear") == 0){
+                    commandLog.emplace_back("<Debug> clear");
                     system("cls");
                 }
                 else{
@@ -200,6 +274,7 @@ int main(){
                 cout << "\nTo view a guide to all commands, TYPE: help\nCommand<Debug>: ";
                 cin.getline(buffer, SIZE);
             }
+            commandLog.emplace_back("<Debug> exit");
         }
         else{
             cout << "Invalid Command" << endl;

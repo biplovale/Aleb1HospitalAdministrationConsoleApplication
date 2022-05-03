@@ -1,0 +1,8 @@
+add -b patients
+print report -t patients
+<Debug> log operations
+<Debug> exit
+treat all
+treat all
+print report -t patients
+log operations

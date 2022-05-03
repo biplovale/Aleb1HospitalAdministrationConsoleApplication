@@ -17,7 +17,8 @@ public:
     void popTriageList();                                                                                               //removes the top element from triage system
     void popTreatedTriageList();                                                                                        //removes the top element from treated triage system
     void consoleReportPatient(const Patient& patient) const;
-    void fileReportPatient(const Patient& patient) const;
+    void fileReportPatient(const Patient& patient, bool reportAll) const;
+    void fileReportClear() const;
 
     //mutators and accessors
     priority_queue<Patient, vector<Patient>, LessThanByPriority> getTriageList() const;

@@ -20,6 +20,7 @@ public:
     string getSuffix() const;
     vector<string> getAliment() const;
     bool getIsTreated() const;
+    void setIsTreated(bool b);
     string getDoctor() const;
     unsigned int getPriority() const;
 

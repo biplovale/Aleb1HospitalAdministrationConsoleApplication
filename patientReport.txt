@@ -1,3 +1,13 @@
+First Name:                                       Amy                                               
+Middle Name:                                      N                                                 
+Last Name:                                        Clark                                             
+Suffix:                                                                                             
+Ailment:                                          broken nose                                       
+Ailment:                                          excessive bleeding                                
+Doctor:                                           Pepper                                            
+Treated:                                          1                                                 
+Priority:                                         1                                                 
+
 First Name:                                       Mike                                              
 Middle Name:                                      L                                                 
 Last Name:                                        Clark                                             
@@ -5,5 +15,16 @@ Suffix:                                           Jr
 Ailment:                                          broken nose                                       
 Ailment:                                          excessive bleeding                                
 Doctor:                                           Suess                                             
-Treated:                                          0                                                 
+Treated:                                          1                                                 
 Priority:                                         100                                               
+
+First Name:                                       Daniel                                            
+Middle Name:                                      Lee                                               
+Last Name:                                        Clark                                             
+Suffix:                                                                                             
+Ailment:                                          broken nose                                       
+Ailment:                                          excessive bleeding                                
+Doctor:                                           House                                             
+Treated:                                          1                                                 
+Priority:                                         9001                                              
+

@@ -12,7 +12,8 @@ private:
     FileLogger();
 public:
     static FileLogger& getInstance();
-    void log(const Patient& patient) const;                             //writes the content in a .txt file
+    void log(const Patient& patient, bool reportAll) const;                             //writes the content in a .txt file
+    void clearLog() const;
 };
 
 

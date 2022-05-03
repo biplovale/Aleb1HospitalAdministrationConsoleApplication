@@ -49,6 +49,9 @@ vector<string> Patient::getAliment() const{
 bool Patient::getIsTreated() const {
     return isTreated;
 }
+void Patient::setIsTreated(bool b) {
+    isTreated = b;
+}
 string Patient::getDoctor() const{
     return doctor;
 }

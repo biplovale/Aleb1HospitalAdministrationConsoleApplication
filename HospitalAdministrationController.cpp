@@ -20,8 +20,10 @@ void HospitalAdministrationController::addPatient(const Patient &patient) {
 
 //removes patient from triage system to treated triage system
 void HospitalAdministrationController::removePatient() {
-    treatedTriageList.push(triageList.top());
+    Patient patient = triageList.top();
     triageList.pop();
+    patient.setIsTreated(true);
+    treatedTriageList.push(patient);
 }
 
 void HospitalAdministrationController::popTriageList() {
@@ -36,8 +38,12 @@ void HospitalAdministrationController::consoleReportPatient(const Patient& patie
     cLogger.log(patient);
 }
 
-void HospitalAdministrationController::fileReportPatient(const Patient& patient) const {
-    fLogger.log(patient);
+void HospitalAdministrationController::fileReportPatient(const Patient& patient, bool reportAll) const {
+    fLogger.log(patient, reportAll);
+}
+
+void HospitalAdministrationController::fileReportClear() const {
+    fLogger.clearLog();
 }
 
 //Accessors and Mutators
