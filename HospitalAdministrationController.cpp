@@ -32,6 +32,14 @@ void HospitalAdministrationController::popTreatedTriageList() {
     treatedTriageList.pop();
 }
 
+void HospitalAdministrationController::consoleReportPatient(const Patient& patient) const {
+    cLogger.log(patient);
+}
+
+void HospitalAdministrationController::fileReportPatient(const Patient& patient) const {
+    fLogger.log(patient);
+}
+
 //Accessors and Mutators
 priority_queue<Patient, vector<Patient>, LessThanByPriority> HospitalAdministrationController::getTriageList() const {
     return triageList;

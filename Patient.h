@@ -3,8 +3,6 @@
 
 //Libraries
 #include <string>
-#include "ConsoleLogger.h"                      //For console logs
-#include "FileLogger.h"                         //For File logs
 #include <vector>
 using namespace std;
 
@@ -31,8 +29,6 @@ private:
     string doctor;
     bool isTreated;
     unsigned int priority;
-    ConsoleLogger cLogger = ConsoleLogger::getInstance();
-    FileLogger fLogger = FileLogger::getInstance();
 };
 
 #endif //PATIENT_H

@@ -9,11 +9,9 @@
 #include "HospitalAdministrationController.h"
 #include "Patient.h"
 #include <iostream>
-#include <iomanip>
 #include <cstring>
 #include <unistd.h>
 #include <fstream>
-#include <sstream>
 #include <algorithm>
 
 using namespace std;
@@ -65,6 +63,7 @@ int main(){
                 getline(cin, suf);;
                 cout << "Number of ailment to be added:\n";
                 cin >> numOfAilment;               //needs exception handler
+                cin.ignore();
                 for(int i = 1; i <= numOfAilment; i++){
                     cout << "Enter ailment:\n";
                     getline(cin, eachAilment);
@@ -83,20 +82,27 @@ int main(){
             }
         }
         else if (strcmp(buffer, "treat patient") == 0){
-            if(!HAController.getTreatedTriageList().empty()) {
+            if(!HAController.getTriageList().empty()) {
                 int random = rand() % (4 - 2 + 1) + 1;
                 sleep(random);
                 HAController.removePatient();
+                cout << "current patient treated" << endl;
+            }else {
+                cout << "Triage system is empty\n";
             }
         }
-        else if (strcmp(buffer, "report patient") == 0){
-            cout << "report patient" << endl;
+        else if (strcmp(buffer, "report patient") == 0) {
+            HAController.consoleReportPatient(HAController.getTriageList().top());
         }
         else if (strcmp(buffer, "print report patient") == 0){
-            cout << "print report patient" << endl;
+            HAController.fileReportPatient(HAController.getTriageList().top());
+            cout << "\tReport printed." << endl;
         }
         else if (strcmp(buffer, "report -n patient") == 0){
-            cout << "report -n patient" << endl;
+            Patient currentPatient = HAController.getTriageList().top();
+            HAController.popTriageList();
+            HAController.consoleReportPatient(HAController.getTriageList().top());
+            HAController.getTriageList().push(currentPatient);
         }
         else if (strcmp(buffer, "report patient NAME") == 0){
             cout << "report patient NAME" << endl;
@@ -119,7 +125,7 @@ int main(){
         else if (strcmp(buffer, "clear") == 0){
             system("cls");
         }
-        else if (strcmp(buffer, "add -b patient FILENAME.TXT") == 0){
+        else if (strcmp(buffer, "add -b patients") == 0){
             ifstream inClientFile("patients.txt", ios::in);
 
 //            string fileName;
@@ -227,7 +233,7 @@ void listNormalCommands(){
                        "\tprint report -t patients           = write out a detail report of all triage patients in a .txt\n"
                        "\ttreat all                          = treat all patients in triage\n"
                        "\tprint report -d patients           = write out a detail report all patients by doctor in a .txt\n"
-                       "\tadd -b patient FILENAME.TXT        = bulk add patients to the triage system from a .txt\n"
+                       "\tadd -b patients                    = bulk add patients to the triage system from a .txt\n"
                        "\tlog operations                     = write out all executed system operations in a .txt\n"
                        "\tmode debug                         = to turn on debug mode\n"
                        "\tclear                              = clear console";
