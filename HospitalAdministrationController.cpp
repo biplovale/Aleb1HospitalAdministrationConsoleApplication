@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "HospitalAdministrationController.h"
 
 //Constructor
@@ -45,6 +46,54 @@ void HospitalAdministrationController::fileReportPatient(const Patient& patient,
 void HospitalAdministrationController::fileReportClear() const {
     fLogger.clearLog();
 }
+
+const Patient& HospitalAdministrationController::searchAndPrintPatient(const string& firstName, const string& middleName,
+                                                               const string& lastName, const string& suffix) {
+    vector<Patient> searchList;
+
+    while (!triageList.empty()){
+        Patient eachPatient = triageList.top();
+        triageList.pop();
+        searchList.push_back(eachPatient);
+    }
+    for (int i = 0; i < searchList.size(); i++){
+        triageList.push(searchList[i]);
+    }
+    auto filterFunc = [firstName, middleName, lastName, suffix](const Patient& p){
+        return firstName == p.getFirstName() && middleName == p.getMiddleName() && lastName == p.getLastName() && suffix == p.getSuffix();
+    };
+
+    vector<Patient>::iterator it = find_if(searchList.begin(), searchList.end(),filterFunc);
+
+    if (it != searchList.end()){
+        cLogger.log(*it);
+    }
+    else {
+//    if (targetPatientPtr == NULL) {
+        searchList.clear();
+//    multimap<Patient>::iterator searcher = find(searchList.begin(), searchList.end(), firstName);
+
+        while (!treatedTriageList.empty()) {
+            Patient eachPatient = treatedTriageList.top();
+            treatedTriageList.pop();
+            searchList.push_back(eachPatient);
+        }
+        for (int i = 0; i < searchList.size(); i++) {
+            treatedTriageList.push(searchList[i]);
+        }
+
+        it = find_if(searchList.begin(), searchList.end(), filterFunc);
+
+        if (it != searchList.end()) {
+            cLogger.log(*it);
+        }
+        else{
+            cout << "The Patient is not in the system" << endl;
+        }
+    }
+}
+
+
 
 //Accessors and Mutators
 priority_queue<Patient, vector<Patient>, LessThanByPriority> HospitalAdministrationController::getTriageList() const {

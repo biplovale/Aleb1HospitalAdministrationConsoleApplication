@@ -6,6 +6,8 @@
 #include "ConsoleLogger.h"
 #include "FileLogger.h"
 #include <iomanip>
+#include <string>
+#include <map>
 #include <queue>
 
 class HospitalAdministrationController {
@@ -19,6 +21,7 @@ public:
     void consoleReportPatient(const Patient& patient) const;
     void fileReportPatient(const Patient& patient, bool reportAll) const;
     void fileReportClear() const;
+    const Patient& searchAndPrintPatient(const string& firstName, const string& middleName, const string& lastName, const string& suffix);
 
     //mutators and accessors
     priority_queue<Patient, vector<Patient>, LessThanByPriority> getTriageList() const;

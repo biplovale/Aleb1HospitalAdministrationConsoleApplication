@@ -11,7 +11,6 @@
 #include <iostream>
 #include <cstring>
 #include <unistd.h>
-#include <fstream>
 #include <algorithm>
 
 using namespace std;
@@ -63,7 +62,7 @@ int main(){
                 getline(cin, mName);;
                 cout << "Enter last name:\n";
                 getline(cin, lName);;
-                cout << "Enter suffix (\"None\" if not applicable):\n";
+                cout << "Enter suffix (press ENTER if not applicable):\n";
                 getline(cin, suf);;
                 cout << "Number of ailment to be added:\n";
                 cin >> numOfAilment;               //needs exception handler
@@ -112,11 +111,26 @@ int main(){
             HAController.consoleReportPatient(HAController.getTriageList().top());
             HAController.getTriageList().push(currentPatient);
         }
+
+
         else if (strcmp(buffer, "report patient NAME") == 0){
             commandLog.emplace_back("report patient NAME");
 
-            cout << "report patient NAME" << endl;
+            //User input for patient Name
+            string fName, mName, lName, suf = "";
+            cout << "Enter the patient's first name:" << endl;
+            getline(cin, fName);
+            cout << "Enter the patient's middle name(if none, press ENTER):" << endl;
+            getline(cin, mName);
+            cout << "Enter the patient's last name:" << endl;
+            getline(cin, lName);
+            cout << "Enter the patient's suffix (if none, press ENTER):" << endl;
+            getline(cin, suf);
+
+            HAController.searchAndPrintPatient(fName, mName, lName, suf);
         }
+
+
         else if (strcmp(buffer, "print report -td patients") == 0){
             commandLog.emplace_back("print report -td patients");
 
@@ -171,11 +185,15 @@ int main(){
             }
 
         }
-        else if (strcmp(buffer, "print report -d patients") == 0){
-            commandLog.emplace_back("print report -d patients");
 
-            cout << "print report -d patients" << endl;
-        }
+
+//        else if (strcmp(buffer, "print report -d patients") == 0){
+//            commandLog.emplace_back("print report -d patients");
+//
+//            cout << "print report -d patients" << endl;
+//        }
+
+
         else if (strcmp(buffer, "log operations") == 0){
             commandLog.emplace_back("log operations");
 
@@ -197,11 +215,12 @@ int main(){
         else if (strcmp(buffer, "add -b patients") == 0){
             commandLog.emplace_back("add -b patients");
 
-            ifstream inClientFile("patients.txt", ios::in);
-
+            //User input for filename
 //            string fileName;
 //            cout << "Enter the .txt file:\n";
 //            cin >> fileName;
+
+            ifstream inClientFile("patients.txt", ios::in);
 
             if(!inClientFile){
                 cerr << "File could not be opened" << endl;
@@ -314,7 +333,7 @@ void listNormalCommands(){
                        "\tprint report -td patients          = write out a detail report of all treated patients in a .txt\n"
                        "\tprint report -t patients           = write out a detail report of all triage patients in a .txt\n"
                        "\ttreat all                          = treat all patients in triage\n"
-                       "\tprint report -d patients           = write out a detail report all patients by doctor in a .txt\n"
+//                       "\tprint report -d patients           = write out a detail report all patients by doctor in a .txt\n"
                        "\tadd -b patients                    = bulk add patients to the triage system from a .txt\n"
                        "\tlog operations                     = write out all executed system operations in a .txt\n"
                        "\tmode debug                         = to turn on debug mode\n"
