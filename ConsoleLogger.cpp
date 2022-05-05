@@ -14,9 +14,8 @@ void ConsoleLogger::log(const Patient& patient) const{
     cout << setw(50) << left << "Middle Name: " << setw(50) << left << patient.getMiddleName() << endl;
     cout << setw(50) << left  << "Last Name: " << setw(50) << left <<  patient.getLastName() << endl;
     cout << setw(50) << left << "Suffix: " << setw(50) << left << patient.getSuffix() << endl;
-    int i = 0;
-    while (i < patient.getAliment().size()) {
-        cout << setw(50) << left << "Ailment: " << setw(50) << left << patient.getAliment()[i++] << endl;
+    for(const string eachAilment : patient.getAliment()) {
+        cout << setw(50) << left << "Ailment: " << setw(50) << left << eachAilment << endl;
     }
     cout << setw(50) << left << "Doctor: " << setw(50) << left << patient.getDoctor() << endl;
     cout << setw(50) << left << "Treated: " << setw(50) << left <<  patient.getIsTreated() << endl;

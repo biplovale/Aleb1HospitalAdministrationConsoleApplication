@@ -9,6 +9,7 @@ FileLogger& FileLogger::getInstance(){
     return instance;
 }
 void FileLogger::log(const Patient& patient, bool reportAll) const{
+
     if (reportAll){
         ofstream outClientFile1("patientReport.txt", ios::app);
 

@@ -66,9 +66,10 @@ int main(){
                 cout << "Enter suffix (press ENTER if not applicable):\n";
                 getline(cin, suf);;
                 cout << "Number of ailment to be added:\n";
-                cin >> numOfAilment;               //needs exception handler
+                cin >> numOfAilment;
                 cin.ignore();
-                for(int i = 1; i <= numOfAilment; i++){
+                ailment.clear();
+                for(int i = 1; i <= numOfAilment; i++) {
                     cout << "Enter ailment:\n";
                     getline(cin, eachAilment);
                     ailment.push_back(eachAilment);
@@ -98,19 +99,34 @@ int main(){
         }
         else if (strcmp(buffer, "report patient") == 0) {
             commandLog.emplace_back("report patient");
-            HAController.consoleReportPatient(HAController.getTriageList().top());
+            if (!HAController.getTriageList().empty()) {
+                HAController.consoleReportPatient(HAController.getTriageList().top());
+            }
+            else{
+                cout << "No patient in Triage" <<endl;
+            }
         }
         else if (strcmp(buffer, "print report patient") == 0){
             commandLog.emplace_back("print report patient");
-            HAController.fileReportPatient(HAController.getTriageList().top(), false);
-            cout << "\tReport printed." << endl;
+            if (!HAController.getTriageList().empty()) {
+                HAController.fileReportPatient(HAController.getTriageList().top(), false);
+                cout << "\tReport printed." << endl;
+            }
+            else{
+                cout << "No patient in Triage" <<endl;
+            }
         }
         else if (strcmp(buffer, "report -n patient") == 0){
             commandLog.emplace_back("report -n patient");
-            Patient currentPatient = HAController.getTriageList().top();
-            HAController.popTriageList();
-            HAController.consoleReportPatient(HAController.getTriageList().top());
-            HAController.getTriageList().push(currentPatient);
+            if (!HAController.getTriageList().empty()) {
+                Patient currentPatient = HAController.getTriageList().top();
+                HAController.popTriageList();
+                HAController.consoleReportPatient(HAController.getTriageList().top());
+                HAController.getTriageList().push(currentPatient);
+            }
+            else{
+                cout << "No patient in Triage" <<endl;
+            }
         }
 
 
@@ -147,7 +163,7 @@ int main(){
             }
 
             for (int i = 0; i < tempList.size(); i++){
-                HAController.getTreatedTriageList().push(tempList[i]);
+                HAController.addPatient(tempList[i]);
             }
 
             cout << "Report printed" << endl;
@@ -166,7 +182,7 @@ int main(){
             }
 
             for (int i = 0; i < tempList.size(); i++){
-                HAController.getTriageList().push(tempList[i]);
+                HAController.addPatient(tempList[i]);
             }
 
             cout << "Report printed" << endl;
@@ -201,10 +217,12 @@ int main(){
             }
 
             while (!HAController.getTreatedTriageList().empty()){
-                patientListByDoctor.push(HAController.getTreatedTriageList().top());
+                Patient patient = HAController.getTreatedTriageList().top();
+                patientListByDoctor.push(patient);
                 HAController.popTreatedTriageList();
             }
 
+            HAController.fileReportClear();
             while (!patientListByDoctor.empty()){
                 Patient patient = patientListByDoctor.top();
                 HAController.fileReportPatient(patient, true);
@@ -212,7 +230,7 @@ int main(){
                 patientListByDoctor.pop();
             }
 
-            cout << "print report -d patients" << endl;
+            cout << "Report printed" << endl;
         }
 
 
