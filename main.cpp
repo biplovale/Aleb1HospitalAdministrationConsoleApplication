@@ -10,6 +10,7 @@
 #include "Patient.h"
 #include <iostream>
 #include <cstring>
+#include <queue>
 #include <unistd.h>
 #include <algorithm>
 
@@ -20,7 +21,7 @@ string convertToString(char* a);                                                
 void listNormalCommands();                                                                                              //lists all the possible commands in normal mode
 void listDebugCommands();                                                                                               //lists all the possible commands in debug mode //add patient to triage system
 char* fillFileReadBuffer(ifstream& Fobj, char buffer[], char delimiter);                                                //fills the buffer from .txt till the delimiter is reached
-
+void printAll(const Patient& patient);
 //Console Interface
 int main(){
     cout << "\n" << setw(60) << right << "HOSPITAL" << " ADMINISTRATION CONSOLE APPLICATION" << endl;
@@ -127,7 +128,8 @@ int main(){
             cout << "Enter the patient's suffix (if none, press ENTER):" << endl;
             getline(cin, suf);
 
-            HAController.searchAndPrintPatient(fName, mName, lName, suf);
+            Patient targetPatient = HAController.searchPatient(fName, mName, lName, suf);
+            HAController.consoleReportPatient(targetPatient);
         }
 
 
@@ -187,11 +189,31 @@ int main(){
         }
 
 
-//        else if (strcmp(buffer, "print report -d patients") == 0){
-//            commandLog.emplace_back("print report -d patients");
-//
-//            cout << "print report -d patients" << endl;
-//        }
+        else if (strcmp(buffer, "print report -d patients") == 0){
+            commandLog.emplace_back("print report -d patients");
+
+            priority_queue<Patient, vector<Patient>, SortByDoctor> patientListByDoctor;
+
+            while (!HAController.getTriageList().empty()){
+                Patient patient = HAController.getTriageList().top();
+                patientListByDoctor.push(patient);
+                HAController.popTriageList();
+            }
+
+            while (!HAController.getTreatedTriageList().empty()){
+                patientListByDoctor.push(HAController.getTreatedTriageList().top());
+                HAController.popTreatedTriageList();
+            }
+
+            while (!patientListByDoctor.empty()){
+                Patient patient = patientListByDoctor.top();
+                HAController.fileReportPatient(patient, true);
+                HAController.addPatient(patient);
+                patientListByDoctor.pop();
+            }
+
+            cout << "print report -d patients" << endl;
+        }
 
 
         else if (strcmp(buffer, "log operations") == 0){
@@ -227,15 +249,16 @@ int main(){
                 exit(1);
             }
 
+            string fName, mName, lName, suf;
+            vector<string> ailment;
+            string doctor;
+            bool isTreated;
+            unsigned int priority;
+
+            string eachAilment;
             //reading from files
             while(!inClientFile.eof()) {
-                string fName, mName, lName, suf;
-                vector<string> ailment;
-                string doctor;
-                bool isTreated;
-                unsigned int priority;
 
-                string eachAilment;
                 char fileReadBuffer[20];                                                                                //buffer for file read inputs
 
                 fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
@@ -264,8 +287,9 @@ int main(){
                 fillFileReadBuffer(inClientFile, fileReadBuffer, ':');
                 priority = strtol(fillFileReadBuffer(inClientFile, fileReadBuffer, '\n'), nullptr, 10);
 
-                Patient patient(fName, mName, lName, suf, ailment, doctor, isTreated, priority);
-                HAController.addPatient(patient);
+                Patient* patientPtr = new Patient(fName, mName, lName, suf, ailment, doctor, isTreated, priority);
+                HAController.addPatient(*patientPtr);
+                ailment.clear();
             }
 
             cout << "\t[EoF reached]" << endl;
@@ -333,7 +357,7 @@ void listNormalCommands(){
                        "\tprint report -td patients          = write out a detail report of all treated patients in a .txt\n"
                        "\tprint report -t patients           = write out a detail report of all triage patients in a .txt\n"
                        "\ttreat all                          = treat all patients in triage\n"
-//                       "\tprint report -d patients           = write out a detail report all patients by doctor in a .txt\n"
+                       "\tprint report -d patients           = write out a detail report all patients by doctor in a .txt\n"
                        "\tadd -b patients                    = bulk add patients to the triage system from a .txt\n"
                        "\tlog operations                     = write out all executed system operations in a .txt\n"
                        "\tmode debug                         = to turn on debug mode\n"
@@ -368,4 +392,15 @@ char* fillFileReadBuffer(ifstream& Fobj, char buffer[], char delimiter){
     buffer[i] = c;
 
     return buffer;
+}
+
+void printAll(const Patient& patient){
+    string eachAilment;
+    int i = 0;
+    cout << patient.getFirstName();
+    while (!patient.getAliment().empty()) {
+        string eachAilment = patient.getAliment()[i];
+        cout << eachAilment << endl;
+        i++;
+    }
 }

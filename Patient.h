@@ -8,7 +8,7 @@ using namespace std;
 
 class Patient {
 public:
-    Patient(string fName, string mName, string lName, string suf, const vector<string>& ail, string doc, bool isT, unsigned int pri);   //Constructor
+    Patient(string fName, string mName, string lName, string suf, vector<string> ail, string doc, bool isT, unsigned int pri);   //Constructor
     ~Patient();                                                                                                         //Destructor
     Patient(const Patient& rhs);                                                                                        //Copy constructor
     Patient& operator=(const Patient& rhs);                                                                       //operator= overload

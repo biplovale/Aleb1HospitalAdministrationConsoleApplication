@@ -47,7 +47,7 @@ void HospitalAdministrationController::fileReportClear() const {
     fLogger.clearLog();
 }
 
-const Patient& HospitalAdministrationController::searchAndPrintPatient(const string& firstName, const string& middleName,
+const Patient HospitalAdministrationController::searchPatient(const string& firstName, const string& middleName,
                                                                const string& lastName, const string& suffix) {
     vector<Patient> searchList;
 
@@ -66,12 +66,10 @@ const Patient& HospitalAdministrationController::searchAndPrintPatient(const str
     vector<Patient>::iterator it = find_if(searchList.begin(), searchList.end(),filterFunc);
 
     if (it != searchList.end()){
-        cLogger.log(*it);
+        return *it;
     }
     else {
-//    if (targetPatientPtr == NULL) {
         searchList.clear();
-//    multimap<Patient>::iterator searcher = find(searchList.begin(), searchList.end(), firstName);
 
         while (!treatedTriageList.empty()) {
             Patient eachPatient = treatedTriageList.top();
@@ -85,7 +83,8 @@ const Patient& HospitalAdministrationController::searchAndPrintPatient(const str
         it = find_if(searchList.begin(), searchList.end(), filterFunc);
 
         if (it != searchList.end()) {
-            cLogger.log(*it);
+            return *it;
+
         }
         else{
             cout << "The Patient is not in the system" << endl;

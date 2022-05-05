@@ -3,4 +3,4 @@ project(HospitalAdministrationConsoleApp)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(HospitalAdministrationConsoleApp main.cpp Patient.cpp ConsoleLogger.cpp FileLogger.cpp HospitalAdministrationController.cpp)
+add_executable(HospitalAdministrationConsoleApp main.cpp Patient.cpp ConsoleLogger.cpp FileLogger.cpp HospitalAdministrationController.cpp Comparator.cpp)

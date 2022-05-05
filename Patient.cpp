@@ -1,7 +1,7 @@
 #include "Patient.h"
 
 //Constructor
-Patient::Patient(string fName, string mName, string lName, string suf, const vector<string>& ail, string doc, bool isT, unsigned int pri)
+Patient::Patient(string fName, string mName, string lName, string suf, vector<string> ail, string doc, bool isT, unsigned int pri)
     : firstName(fName), middleName(mName), lastName(lName), suffix(suf), ailment(ail), doctor(doc), isTreated(isT), priority(pri){
 }
 

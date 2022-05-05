@@ -22,6 +22,6 @@ middleName:Lee
 lastName:Clark
 suffix:
 ailment:whiny
-doctor:House
+doctor:Suess
 treated:0
 priority:9001

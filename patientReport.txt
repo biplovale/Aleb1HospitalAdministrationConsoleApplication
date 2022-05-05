@@ -8,6 +8,16 @@ Doctor:                                           Pepper
 Treated:                                          1                                                 
 Priority:                                         1                                                 
 
+First Name:                                       Daniel                                            
+Middle Name:                                      Lee                                               
+Last Name:                                        Clark                                             
+Suffix:                                                                                             
+Ailment:                                          broken nose                                       
+Ailment:                                          excessive bleeding                                
+Doctor:                                           Suess                                             
+Treated:                                          0                                                 
+Priority:                                         9001                                              
+
 First Name:                                       Mike                                              
 Middle Name:                                      L                                                 
 Last Name:                                        Clark                                             
@@ -15,16 +25,6 @@ Suffix:                                           Jr
 Ailment:                                          broken nose                                       
 Ailment:                                          excessive bleeding                                
 Doctor:                                           Suess                                             
-Treated:                                          1                                                 
+Treated:                                          0                                                 
 Priority:                                         100                                               
-
-First Name:                                       Daniel                                            
-Middle Name:                                      Lee                                               
-Last Name:                                        Clark                                             
-Suffix:                                                                                             
-Ailment:                                          broken nose                                       
-Ailment:                                          excessive bleeding                                
-Doctor:                                           House                                             
-Treated:                                          1                                                 
-Priority:                                         9001                                              
 

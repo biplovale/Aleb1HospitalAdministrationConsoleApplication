@@ -2,12 +2,15 @@
 #define COMPARATOR_H
 
 #include "Patient.h"
+#include <string.h>
 
 class LessThanByPriority{
 public:
-    bool operator() (const Patient& lhs, const Patient& rhs) {
-        return (lhs.getPriority() > rhs.getPriority());
-    }
+    bool operator() (const Patient& lhs, const Patient& rhs);
 };
 
+class SortByDoctor{
+public:
+    bool operator() (const Patient& lhs, const Patient& rhs);
+};
 #endif //COMPARATOR_H

@@ -21,14 +21,14 @@ void FileLogger::log(const Patient& patient, bool reportAll) const{
         outClientFile1 << setw(50) << left << "Middle Name: " << setw(50) << left << patient.getMiddleName() << endl;
         outClientFile1 << setw(50) << left  << "Last Name: " << setw(50) << left <<  patient.getLastName() << endl;
         outClientFile1 << setw(50) << left << "Suffix: " << setw(50) << left << patient.getSuffix() << endl;
-        int i = 0;
-        while (i < patient.getAliment().size()) {
-            outClientFile1 << setw(50) << left << "Ailment: " << setw(50) << left << patient.getAliment()[i++] << endl;
+        for(const string eachAilment : patient.getAliment()) {
+            outClientFile1 << setw(50) << left << "Ailment: " << setw(50) << left << eachAilment << endl;
         }
         outClientFile1 << setw(50) << left << "Doctor: " << setw(50) << left << patient.getDoctor() << endl;
         outClientFile1 << setw(50) << left << "Treated: " << setw(50) << left <<  patient.getIsTreated() << endl;
         outClientFile1 << setw(50) << left << "Priority: " << setw(50) << left << patient.getPriority() << endl;
         outClientFile1 << endl;
+
     }
     else {
         ofstream outClientFile("patientReport.txt", ios::out);
